@@ -13,8 +13,8 @@
 
 @interface ViewController : UIViewController
 
-@property (copy, nonatomic) NSString *firstName;
-@property (copy, nonatomic) NSString *secondName;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *secondName;
 @property (strong, nonatomic) NSNumber *year;
 
 @end

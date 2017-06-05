@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SecondViewController.h"
+#import "NSMutableArray+Swizziling.h"
 
 @interface ViewController ()
 
@@ -18,14 +19,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.firstName = @"FirstName";
+
+    NSString *low = [self.firstName lowercaseString];
+    NSLog(@"%@", low);
+    NSString *upp = [self.firstName uppercaseString];
+    NSLog(@"%@", upp);
     
-    // Do any additional setup after loading the view, typically from a nib.
-}
+//    Method addObject = class_getInstanceMethod([NSMutableArray class], @selector(addObject:));
+//    Method logAddObject = class_getInstanceMethod([NSMutableArray class], @selector(logAddObject:));
+//    method_exchangeImplementations(addObject, logAddObject);
+    
+     low = [self.firstName lowercaseString];
+    NSLog(@"%@", low);
+    upp = [self.firstName uppercaseString];
+    NSLog(@"%@", upp);
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//    self.secondName = @"SecondName";
+//    self.year = @23;
+//    NSLog(@"%@", [self description]);
+//
+//    SecondViewController *secondViewController = [[SecondViewController alloc] init];
+//    secondViewController.name = @"Name";
+//    secondViewController.someTitle = @"SomeTitle";
+//    secondViewController.quantity = @55;
+//    NSLog(@"%@", [secondViewController description]);
+//
+//    NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+//    [mutableArray addObject:@"first"];
+//    [mutableArray addObject:@"second"];
+//    [mutableArray addObject:@"third"];
 }
 
 //RUNTIME exaple for description method
@@ -41,7 +64,7 @@
         char const *propertyName = property_getName(properties[i]);
         const char *attr = property_getAttributes(properties[i]);
         
-        if (attr[i] == '@') {
+        if (attr[i + 1] == '@') {
             NSString *selector = [NSString stringWithCString:propertyName encoding:NSUTF8StringEncoding];
             SEL sel = sel_registerName([selector UTF8String]);
             // id result = ((id (*)(id, SEL))objc_msgSend)(self, sel);
@@ -55,3 +78,6 @@
 }
 
 @end
+
+
+#pragma mark - Swizzling
